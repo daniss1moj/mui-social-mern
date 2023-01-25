@@ -54,7 +54,7 @@ const Form = () => {
 			formData.append(value, values[value]);
 		}
 		formData.append('picturePath', values.picture.name);
-		const savedUserResponse = await fetch(`${process.env.REACT_BASE_URL}/auth/register`, {
+		const savedUserResponse = await fetch(`/auth/register`, {
 			method: 'POST',
 			body: formData,
 		});
@@ -66,11 +66,14 @@ const Form = () => {
 	};
 
 	const login = async (values, onSubmitProps) => {
-		const loggedInResponse = await fetch(`${process.env.REACT_BASE_URL}/auth/login`, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(values),
-		});
+		const loggedInResponse = await fetch(
+			`https://social-backend-n2f2.onrender.com/auth/login`,
+			{
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(values),
+			},
+		);
 		const loggedIn = await loggedInResponse.json();
 		onSubmitProps.resetForm();
 
