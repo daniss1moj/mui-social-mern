@@ -39,28 +39,34 @@ const PostWidget = ({
 	const primary = palette.primary.main;
 
 	const patchLike = async () => {
-		const response = await fetch(`${process.env.REACT_BASE_URL}/posts/${postId}/like`, {
-			method: 'PATCH',
-			headers: {
-				Authorization: `Bearer ${token}`,
-				'Content-type': 'application/json',
+		const response = await fetch(
+			`https://social-backend-n2f2.onrender.com/posts/${postId}/like`,
+			{
+				method: 'PATCH',
+				headers: {
+					Authorization: `Bearer ${token}`,
+					'Content-type': 'application/json',
+				},
+				body: JSON.stringify({ userId: loggedInUserId }),
 			},
-			body: JSON.stringify({ userId: loggedInUserId }),
-		});
+		);
 
 		const updatedPost = await response.json();
 		dispatch(setPost({ post: updatedPost }));
 	};
 
 	const addComment = async () => {
-		const response = await fetch(`${process.env.REACT_BASE_URL}/posts/${postId}/comments`, {
-			method: 'POST',
-			headers: {
-				Authorization: `Bearer ${token}`,
-				'Content-type': 'application/json',
+		const response = await fetch(
+			`https://social-backend-n2f2.onrender.com/posts/${postId}/comments`,
+			{
+				method: 'POST',
+				headers: {
+					Authorization: `Bearer ${token}`,
+					'Content-type': 'application/json',
+				},
+				body: JSON.stringify({ comment }),
 			},
-			body: JSON.stringify({ comment }),
-		});
+		);
 		const updatedPost = await response.json();
 		dispatch(setPost({ post: updatedPost }));
 	};
@@ -79,7 +85,7 @@ const PostWidget = ({
 			{picturePath && (
 				<Box mt="1rem">
 					<img
-						src={`${process.env.REACT_BASE_URL}/assets/${picturePath}`}
+						src={`https://social-backend-n2f2.onrender.com/assets/${picturePath}`}
 						alt="post"
 						width="100%"
 						height="auto"

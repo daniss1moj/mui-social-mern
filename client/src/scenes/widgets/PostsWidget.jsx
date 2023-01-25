@@ -11,7 +11,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	const getPosts = async () => {
-		const response = await fetch(`${process.env.REACT_BASE_URL}/posts`, {
+		const response = await fetch(`https://social-backend-n2f2.onrender.com/posts`, {
 			method: 'GET',
 			headers: { Authorization: `Bearer ${token}` },
 		});
@@ -20,10 +20,13 @@ const PostsWidget = ({ userId, isProfile = false }) => {
 	};
 
 	const getUserPosts = async () => {
-		const response = await fetch(`${process.env.REACT_BASE_URL}/posts/${userId}/posts`, {
-			method: 'GET',
-			headers: { Authorization: `Bearer ${token}` },
-		});
+		const response = await fetch(
+			`https://social-backend-n2f2.onrender.com/posts/${userId}/posts`,
+			{
+				method: 'GET',
+				headers: { Authorization: `Bearer ${token}` },
+			},
+		);
 		const data = await response.json();
 
 		dispatch(setPosts({ posts: data }));

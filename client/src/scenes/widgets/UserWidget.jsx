@@ -24,10 +24,13 @@ const UserWidget = ({ userId, picturePath }) => {
 
 	const getUser = async () => {
 		try {
-			const response = await fetch(`${process.env.REACT_BASE_URL}/users/${userId}`, {
-				method: 'GET',
-				headers: { Authorization: `Bearer ${token}` },
-			});
+			const response = await fetch(
+				`https://social-backend-n2f2.onrender.com/users/${userId}`,
+				{
+					method: 'GET',
+					headers: { Authorization: `Bearer ${token}` },
+				},
+			);
 			const data = await response.json();
 			setUser(data);
 		} catch (err) {
